@@ -38,7 +38,15 @@ public class Renderer extends Panel
 			}
 		});
 		
-		ArrayList<Point2DFloat> pts2d = cam.getPointsIn2DAsFloats(pts);
+		RenderPlane plane =  cam.getViewPlane();
+		
+		Point3DFloat center = Math3D.midpoint(cam.getViewPlane().getP3(), cam.getViewPlane().getP2());
+		
+		double angleZ = cam.calcAngle(new Point3DFloat(center), new Point3DFloat(center.getX(), 0, center.getZ()));
+		double angleEle = cam.calcAngle(center, new Point3DFloat(center.getX(), center.getY(), 0));
+		
+		ArrayList<Point2DFloat> pts2d = transformat(cam.getPointsIn2DAsFloats(pts), cam.getPoint2DFloat(plane.getP3(), angleEle, angleZ), 
+				cam.getPoint2DFloat(plane.getP3(), angleEle, angleZ), this.getHeight(), this.getWidth());
 		
 		//TODO get lines and draw them
 		
@@ -48,5 +56,25 @@ public class Renderer extends Panel
 	public void drawLine(LineFloat line)
 	{
 		this.getGraphics().drawLine(Math.round(line.getP1().getX()), Math.round(line.getP1().getY()), Math.round(line.getP2().getX()), Math.round(line.getP2().getY()));
+	}
+	public static ArrayList<Point2DFloat> transformat(ArrayList<Point2DFloat> pts, Point2DFloat topLeft, Point2DFloat bottomRight, int screenHeight, int screenWidth)
+	{
+		ArrayList<Point2DFloat> npts = new ArrayList<Point2DFloat>();
+		
+		float offX = topLeft.getX(), 
+				offY = topLeft.getY();
+		float coefX = screenWidth / (bottomRight.getX()-offX);
+		float coefY = screenHeight / (bottomRight.getY()-offY);
+		
+		/*String ln = System.lineSeparator();
+	    System.out.println("offX="+offX+ln+"offY="+offY+ln+"coefX="+coefX+ln+"coefY="+coefY+ln);*///TODO remove
+		
+		for(Point2DFloat pt : pts)
+		{
+			npts.add(new Point2DFloat(coefX*(pt.getX()-offX), coefY*(pt.getY()-offY)));
+			//TODO
+		}
+		
+		return npts;
 	}
 }

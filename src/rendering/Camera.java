@@ -77,7 +77,7 @@ public class Camera
 	{
 		return calcAngle(point, this.getPointAtAngle());
 	}
-	private double calcAngle(Point3DFloat p1, Point3DFloat p2)
+	public double calcAngle(Point3DFloat p1, Point3DFloat p2)
 	{
 		return Math.atan2(p2.getY()-p1.getY(),p2.getX()-p1.getX())*180.0/Math.PI;
 	}
@@ -120,7 +120,7 @@ public class Camera
 		
 		return pts2d;
 	}
-	private Point2DFloat getPoint2DFloat(Point3DFloat pointt, double angleEle, double angleZ)
+	public Point2DFloat getPoint2DFloat(Point3DFloat pointt, double angleEle, double angleZ)
 	{
 		Point3DFloat point = new Point3DFloat(pointt);
 		Point2DFloat temp = rotate(new Point2DFloat(point.getX(), point.getY()),
