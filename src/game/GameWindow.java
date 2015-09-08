@@ -13,14 +13,14 @@ import rendering.Renderer;
 @SuppressWarnings("serial")
 public class GameWindow extends JFrame implements ComponentListener, WindowListener
 {
-	Renderer panel = new Renderer(null);
+	protected Renderer panel = new Renderer(null);
 	private int windowWidth = this.getWidth();
-	int windowHeight=this.getHeight();
-	int wmod=this.getWidth() - this.panel.getWidth();
-	int hmod=this.getHeight()-this.panel.getHeight();
-	public GameWindow()
+	private int windowHeight=this.getHeight();
+	private Game game;
+	public GameWindow(Game g)
 	{
-		super("Game Title");
+		super(g.gameTitle);
+		this.game = g;
 		this.add(panel);
 		this.addComponentListener(this);
 		this.addWindowListener(this);
@@ -28,10 +28,10 @@ public class GameWindow extends JFrame implements ComponentListener, WindowListe
 		// TODO Auto-generated constructor stub
 	}
 	
-	public GameWindow(World world)
+	public GameWindow(Game g, World world)
 	{
-		this();
-		this.load(world);
+		this(g);
+		this.panel = new Renderer(world);
 	}
 	
 	public void load(World world)
@@ -73,7 +73,7 @@ public class GameWindow extends JFrame implements ComponentListener, WindowListe
 	
 	public void windowClosing(WindowEvent e)
 	{
-		Game.log("Exiting...");
+		game.log("Exiting...");
 		// TODO Auto-generated method stub
 		this.dispose();
 		System.out.println("Exiting...");

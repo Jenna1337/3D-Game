@@ -1,36 +1,30 @@
 package game;
 
-import java.awt.Choice;
 import java.io.File;
 
 public class Game
 {
-	protected static String gameTitle = "<Game title here>";
-	private static java.io.PrintStream log;
+	protected String gameTitle = "<Game title here>";
+	private java.io.PrintStream log;
 	
-	public Game(String[] args)
+	public Game()
 	{
-		Choice load = new Choice();
-		load.add("New...");
-		load.add("Load...");
-		load.setVisible(true);
-		
 		logStart(false);
 		
 		World world = new World();
 		
 		
-		GameWindow window = new GameWindow(world);
+		GameWindow window = new GameWindow(this, world);
 		window.load(world);
 		window.setVisible(true);
 	}
 	
 	/**Writes the text to the log file.**/
-	public static void log(String text)
+	public void log(String text)
 	{
 		log.println(getDateTime()+" "+text);
 	}
-	private static java.io.PrintStream CreateLogPrintStream(boolean overwrite)
+	private java.io.PrintStream CreateLogPrintStream(boolean overwrite)
 	{
 		try
 		{
@@ -48,12 +42,12 @@ public class Game
 			return null;
 		}
 	}
-	public static void logStart(boolean overwrite)
+	public void logStart(boolean overwrite)
 	{
 		log = CreateLogPrintStream(overwrite);
 		log("Starting");
 	}
-	public static void logExit(int status)
+	public void logExit(int status)
 	{
 		if(status != 0)
 			log("Error code: "+status);

@@ -3,7 +3,6 @@ package rendering.shapes;
 import rendering.LineFloat;
 import rendering.Point3DFloat;
 
-@SuppressWarnings({"serial"})
 public class Cube extends Shape3D
 {
 	protected Point3DFloat origin;
@@ -30,7 +29,6 @@ public class Cube extends Shape3D
 	}
 	public void setLocation(Point3DFloat location)
 	{
-		Point3DFloat old = new Point3DFloat(origin);
 		while(lines.size()>0)
 			lines.remove(0);
 		this.origin=location;
@@ -72,8 +70,6 @@ public class Cube extends Shape3D
 		bottom_left,	bottom_right,
 				bottom_back};
 		super.addLines(ls);
-		
-		this.firePropertyChange("Cube_origin", old, this.origin);
 	}
 	@Override
 	public String toString()
