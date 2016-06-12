@@ -1105,7 +1105,7 @@ final class Math3
 			}
 			catch(StringIndexOutOfBoundsException e2)
 			{
-				System.err.println("An error has occured. ");
+				System.err.println("An error has occurred. ");
 				e2.printStackTrace();
 				System.exit(1);
 				return Double.NaN;
