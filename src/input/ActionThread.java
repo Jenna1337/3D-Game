@@ -20,27 +20,17 @@ public class ActionThread extends AbstractAction implements KeyListener
 	public void actionPerformed(ActionEvent arg0)
 	{
 		if(this.source.equals(arg0.getSource()))
-		{
 			this.thread.run();
-		}
 	}
 	public void keyPressed(KeyEvent arg0)
 	{
 		if(this.source.equals(arg0.getSource()))
-		{
 			this.thread.run();
-		}
 	}
 	@Override
 	public void keyReleased(KeyEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
+	{}
 	@Override
 	public void keyTyped(KeyEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
+	{}
 }
