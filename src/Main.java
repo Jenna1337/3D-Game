@@ -1,18 +1,14 @@
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
-
+import game.Game;
 import game.GameSelect;
 
 
-/***************************
- * 
- * @author Jonah Sloan
- * @since v0.06_a
- **************************/
+@SuppressWarnings("unused")
 public class Main
 {
 	public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException
 	{
-		new GameSelect(args);
+		MoleculeSampleApp.main(args);
 	}
 }
